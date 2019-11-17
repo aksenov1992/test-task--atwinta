@@ -1,32 +1,32 @@
 <template>
     <div>
-        <h3>NAME</h3>
-        <img src="" alt="">
+        <h3>{{user.name}}</h3>
+        <img :src="user.image" alt="">
         <table class="table table-borderless">
             <tbody>
             <tr>
                 <th scope="row">Логин</th>
-                <td>@mdo</td>
+                <td>{{user.login}}</td>
             </tr>
             <tr>
                 <th scope="row">Email</th>
-                <td>@fat</td>
+                <td>{{user.email}}</td>
             </tr>
             <tr>
                 <th scope="row">Должность</th>
-                <td>@twitter</td>
+                <td>{{user.worker.position}}</td>
             </tr>
             <tr>
                 <th scope="row">Отдел</th>
-                <td>@twitter</td>
+                <td>{{user.worker.department}}</td>
             </tr>
             <tr>
                 <th scope="row">Зачислен</th>
-                <td>@twitter</td>
+                <td>{{user.worker.adopted_at}}</td>
             </tr>
             <tr>
                 <th scope="row">О себе</th>
-                <td>@twitter</td>
+                <td>{{user.about}}</td>
             </tr>
             </tbody>
         </table>
@@ -34,8 +34,15 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
   export default {
-    name: "ProfileEmployee"
+    name: "ProfileEmployee",
+    computed: {
+      ...mapState({
+        user: state => state.profileEmployee
+      })
+    }
   }
 </script>
 

@@ -1,13 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-dark bg-dark">
-      <router-link
-      tag="a"
-      to="/employees">Сотрудники</router-link>
-      <router-link
-              tag="a"
-              to="/profile">Профиль</router-link>
-    </nav>
+    <Nav/>
     <el-main>
     <router-view></router-view>
     </el-main>
@@ -15,11 +8,12 @@
 </template>
 
 <script>
+import Nav from '@/components/Nav'
 
 export default {
+
   name: 'app',
-  components: {
-  }
+  components: {Nav}
 }
 </script>
 

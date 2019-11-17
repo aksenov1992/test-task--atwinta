@@ -1,23 +1,29 @@
 import VueRouter from 'vue-router';
-import Login from "@/components/Login";
-import Employees from "@/pages/Employees";
-import Profile from "@/pages/Profile";
 
 export default new VueRouter ({
   mode: 'history',
   routes: [
     {
       path: '/',
-      component: Login,
+      name: 'login',
+      component: () => import('@/components/Login'),
 
     },
     {
       path: '/employees',
-      component: Employees
+      name: 'employees',
+      component: () => import('@/pages/Employees'),
+
+    },
+    {
+      path: '/employees/:id',
+      name: 'employeesProfile',
+      component: () => import('@/components/ProfileEmployee')
     },
     {
       path: '/profile',
-      component: Profile
+      name: 'profile',
+      component: () => import('@/pages/Profile')
     }
   ]
 })
