@@ -1,18 +1,16 @@
 <template>
-    <div class="container">
+    <div>
         <CardEmployee/>
-        <Pages/>
     </div>
 </template>
 
 <script>
     import CardEmployee from "@/components/CardEmployee";
-    import Pages from "@/components/Pages";
 
   export default {
     name: "Employees",
-    components: {CardEmployee, Pages},
-    module: { CardEmployee, Pages }
+    components: {CardEmployee},
+    module: { CardEmployee}
   }
 </script>
 

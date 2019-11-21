@@ -1,46 +1,40 @@
-import axios from 'axios'
+import { customAxios } from  '@/utils/customAxios.js'
 
-let token = localStorage.getItem('token')
 
 export default {
   state: {
-    data: [
-      {
-        "id": 0,
-        "login": "string",
-        "name": "string",
-        "email": "string",
-        "image": "string"
-      }
-    ],
-    "total": 0,
-    "per_page": 0,
-    "current_page": 0,
-    "last_page": 0,
-    "next_page_url": "string",
-    "prev_page_url": "string",
-    "from": 0,
-    "to": 0
-  },
-  getters: {
-
+    employee: {
+      data: [
+        {
+          "id": 0,
+          "login": "string",
+          "name": "string",
+          "email": "string",
+          "image": "string"
+        }
+      ],
+      "total": 0,
+      "per_page": 0,
+      "current_page": 0,
+      "last_page": 0,
+      "next_page_url": "string",
+      "prev_page_url": "string",
+      "from": 0,
+      "to": 0
+    }
   },
   mutations: {
     saveData(state, data) {
-      this.state.cardEmployee = data
+      state.employee = data
     }
   },
   actions: {
-    getListEmployee(context, page) {
-      axios.get('http://test.atwinta.ru/api/v1/workers', {
+    getListEmployee({commit}, page) {
+      customAxios.get('/workers', {
         params: {'page' : page},
-        headers: {
-          'Authorization': `Bearer ${token}`,
-
-        }
       })
         .then(response => {
-          context.commit('saveData', response.data)
+          commit('saveData', response.data)
         })
     }
   }

@@ -14,6 +14,7 @@ Vue.config.devtools = true
 export default new Vuex.Store ({
   state: {},
   mutations: {},
+  getters: {},
   actions: {},
   modules: {login, userProfile, cardEmployee, profileEmployee}
 })

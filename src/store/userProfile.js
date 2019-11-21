@@ -1,6 +1,5 @@
-import axios from 'axios'
+import { customAxios } from  '@/utils/customAxios.js'
 
-let token = localStorage.getItem('token')
 
 export default {
   state: {
@@ -12,18 +11,14 @@ export default {
     }
   },
   mutations: {
-    changeData: (state, data) => {
+    changeData(state, data) {
       state.profile = data
     }
 
   },
   actions: {
     getUserProfile ({commit}) {
-      axios.get('http://test.atwinta.ru/api/v1/user', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      customAxios.get('/user')
         .then(response => {
           commit('changeData', response.data)
         })
@@ -32,28 +27,27 @@ export default {
           console.log(error)
         })
     },
-    postUserProfile (state) {
-      let data = state.state.profile;
-
-      axios.post('http://test.atwinta.ru/api/v1/user', {
-        "show_name": data.name,
-        "about": data.about,
-        "github": data.github,
-        "city": data.city,
-        "is_finished": false,
-        "telegram": data.telegram,
-        "phone": data.phone,
-        "birthday": data.birthday
-      },
-        {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+    postUserProfile ({state}) {
+      customAxios.post('/user', {
+        "show_name": state.profile.name,
+        "about": state.profile.about,
+        "github": state.profile.github,
+        "city": state.profile.city,
+        "is_finished": state.profile.is_finished,
+        "telegram": state.profile.telegram,
+        "phone": state.profile.phone,
+        "birthday": state.profile.birthday
       })
         .then(response => {
           // eslint-disable-next-line no-console
-          console.log(response)
+          console.log(response.data)
         })
+    },
+    LOGOUT: () => {
+      return new Promise((resolve) => {
+        localStorage.removeItem('token')
+        resolve()
+      })
     }
   }
 }

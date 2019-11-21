@@ -76,10 +76,12 @@
 
     },
     methods: {
-      ...mapActions(['getUserProfile', 'postUserProfile']),
-        logOut() {
-        localStorage.removeItem('token')
-        }
+      ...mapActions(['getUserProfile', 'postUserProfile', 'LOGOUT']),
+      logOut() {
+        this.LOGOUT().then(() => {
+            this.$router.push('/')
+          })
+      }
     }
   }
 </script>

@@ -1,5 +1,5 @@
-import axios from 'axios'
-let token = localStorage.getItem('token')
+import { customAxios } from  '@/utils/customAxios.js'
+
 
 export default {
   state: {
@@ -22,14 +22,10 @@ export default {
   },
   actions: {
     loadProfileEmployee(state, payload) {
-      axios.get('http://test.atwinta.ru/api/v1/workers/'+ payload, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
-      })
+      customAxios.get('/workers/'+ payload)
         .then(response => {
           this.state.profileEmployee = response.data
         })
     }
-    }
   }
+}

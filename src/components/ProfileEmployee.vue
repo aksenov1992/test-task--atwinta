@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <h3>{{user.name}}</h3>
+    <div class="wrapper">
+    <h1>{{user.name}}</h1>
+    <div class="card">
         <img :src="user.image" alt="">
-        <table class="table table-borderless">
+        <table class="table">
             <tbody>
             <tr>
                 <th scope="row">Логин</th>
@@ -31,6 +32,7 @@
             </tbody>
         </table>
     </div>
+    </div>
 </template>
 
 <script>
@@ -47,5 +49,19 @@
 </script>
 
 <style scoped>
-
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+.card {
+    display: flex;
+    flex-direction: row;
+}
+.card table {
+    width: 50%;
+    text-align: left;
+    border-spacing: 10px;
+    font-size: 20px;
+}
 </style>

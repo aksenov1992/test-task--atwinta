@@ -20,11 +20,19 @@ new Vue({
 
 
 router.beforeEach((to, from, next) => {
-  if (localStorage.getItem('token') !== null) {
-    next()
-  } else {
-    next({
-      path: '/'
-    })
+  const token = localStorage.getItem('token');
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!token) {
+      next({path: '/', query: {redirect: to.fullPath}})
+    } else {
+      next()
+    }
+  } else if (to.meta.guest) {
+    if (!token) {
+      next();
+    } else {
+      next({ name: 'profile' });
+    }
   }
+
 })
